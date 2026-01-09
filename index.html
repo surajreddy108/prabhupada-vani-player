@@ -1,71 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Music Library</title>
-  <link rel="stylesheet" href="styles.css"/>
-
-  <!-- XLSX library -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Music Player</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <!-- Top Nav -->
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo">🎵</div>
-      <div class="brand-text">
-        <h1>Music Library</h1>
-        <p>Powered by Excel Tabs</p>
-      </div>
+
+  <div class="container">
+    <h1>🎵 Music Player</h1>
+
+    <div class="controls">
+      <label>Select Sheet:</label>
+      <select id="sheetSelect"></select>
     </div>
 
-    <div class="player-mini">
-      <div id="miniTitle" class="mini-title">No track selected</div>
-      <audio id="audioPlayer" controls></audio>
-    </div>
-  </header>
+    <ul id="playlist"></ul>
 
-  <!-- App container -->
-  <main class="app">
+    <audio id="audioPlayer" controls></audio>
+    <p id="nowPlaying"></p>
+  </div>
 
-    <!-- Home view (Tiles) -->
-    <section id="homeView" class="view active">
-      <div class="view-header">
-        <h2>Your Collections</h2>
-        <p>Each tile below is a sheet (tab) from your Excel file.</p>
-      </div>
-
-      <div id="tiles" class="tiles-grid"></div>
-    </section>
-
-    <!-- Sheet view (Songs List + Search) -->
-    <section id="sheetView" class="view">
-      <div class="sheet-top">
-        <button id="backBtn" class="btn ghost">← Back</button>
-
-        <div class="sheet-title">
-          <h2 id="sheetNameTitle"></h2>
-          <p id="sheetSubtitle">Browse songs and click to play.</p>
-        </div>
-      </div>
-
-      <div class="sheet-controls">
-        <input id="searchInput" class="search" placeholder="Search songs..." />
-        <span id="countBadge" class="badge">0 songs</span>
-      </div>
-
-      <div id="songsContainer" class="songs"></div>
-    </section>
-
-  </main>
-
-  <footer class="footer">
-    <span>© <span id="year"></span> Music Library</span>
-    <span class="muted">Hosted on GitHub Pages</span>
-  </footer>
-
+  <!-- XLSX library (reads Excel in browser) -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
