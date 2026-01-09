@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕉️</text></svg>">
 </head>
 <body>
     <div class="container">
@@ -21,9 +22,20 @@
                     <i class="fas fa-spinner fa-spin"></i>
                 </div>
                 <p>Loading lectures from Prabhupada Vani...</p>
+                <p class="loading-details">Fetching data from Google Sheet...</p>
+            </div>
+
+            <div id="error" class="error-state" style="display: none;">
+                <!-- Error content will be inserted here -->
             </div>
 
             <div id="content" class="content" style="display: none;">
+                <div class="stats-bar">
+                    <span><i class="fas fa-headphones"></i> <span id="total-lectures">0</span> Lectures</span>
+                    <span><i class="fas fa-heart"></i> <span id="total-favorites">0</span> Favorites</span>
+                    <span><i class="fas fa-calendar"></i> <span id="last-updated">Loading...</span></span>
+                </div>
+
                 <div class="player-section">
                     <div class="now-playing">
                         <div class="current-audio-info">
@@ -46,7 +58,7 @@
                                 <button id="next-btn" class="control-btn" title="Next">
                                     <i class="fas fa-step-forward"></i>
                                 </button>
-                                <button id="repeat-btn" class="control-btn" title="Repeat">
+                                <button id="repeat-btn" class="control-btn" title="Repeat (Off)">
                                     <i class="fas fa-redo"></i>
                                 </button>
                                 <div class="volume-control">
@@ -72,38 +84,46 @@
                             <button id="shuffle-btn" class="shuffle-btn">
                                 <i class="fas fa-random"></i> Shuffle
                             </button>
+                            <button id="clear-filters-btn" class="shuffle-btn" style="background: #95a5a6;">
+                                <i class="fas fa-times"></i> Clear
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <div class="tabs-section">
                     <div class="tabs">
-                        <button class="tab active" data-tab="all">All Lectures</button>
-                        <button class="tab" data-tab="bhagavad-gita">Bhagavad-Gita</button>
-                        <button class="tab" data-tab="srimad-bhagavatam">Srimad-Bhagavatam</button>
-                        <button class="tab" data-tab="caitanya-caritamrta">Caitanya Caritamrta</button>
-                        <button class="tab" data-tab="other">Other Lectures</button>
-                        <button class="tab" data-tab="favorites"><i class="fas fa-heart"></i> Favorites</button>
+                        <button class="tab active" data-tab="all">All Lectures <span class="tab-count">0</span></button>
+                        <button class="tab" data-tab="bhagavad-gita">Bhagavad-Gita <span class="tab-count">0</span></button>
+                        <button class="tab" data-tab="srimad-bhagavatam">Srimad-Bhagavatam <span class="tab-count">0</span></button>
+                        <button class="tab" data-tab="caitanya-caritamrta">Caitanya Caritamrta <span class="tab-count">0</span></button>
+                        <button class="tab" data-tab="other">Other Lectures <span class="tab-count">0</span></button>
+                        <button class="tab" data-tab="favorites"><i class="fas fa-heart"></i> Favorites <span class="tab-count">0</span></button>
                     </div>
 
                     <div class="tab-content active" id="all-content">
                         <div class="lecture-list" id="all-list"></div>
+                        <div class="load-more-container" id="all-load-more"></div>
                     </div>
                     
                     <div class="tab-content" id="bhagavad-gita-content">
                         <div class="lecture-list" id="bhagavad-gita-list"></div>
+                        <div class="load-more-container" id="bhagavad-gita-load-more"></div>
                     </div>
                     
                     <div class="tab-content" id="srimad-bhagavatam-content">
                         <div class="lecture-list" id="srimad-bhagavatam-list"></div>
+                        <div class="load-more-container" id="srimad-bhagavatam-load-more"></div>
                     </div>
                     
                     <div class="tab-content" id="caitanya-caritamrta-content">
                         <div class="lecture-list" id="caitanya-caritamrta-list"></div>
+                        <div class="load-more-container" id="caitanya-caritamrta-load-more"></div>
                     </div>
                     
                     <div class="tab-content" id="other-content">
                         <div class="lecture-list" id="other-list"></div>
+                        <div class="load-more-container" id="other-load-more"></div>
                     </div>
                     
                     <div class="tab-content" id="favorites-content">
@@ -121,7 +141,8 @@
 
         <footer>
             <p>Srila Prabhupada Vani Player &copy; 2024 | Data sourced from <a href="https://docs.google.com/spreadsheets/d/1CcDKyg-_JaiKHyvLZv-zn-g2O8b-8wWC-OP9fiaS0_M/edit?gid=366013512#gid=366013512" target="_blank">Google Sheet</a></p>
-            <p class="footer-note">This player provides direct links to audio files hosted on PrabhupadaVani.org</p>
+            <p class="footer-note">All audio content courtesy of PrabhupadaVani.org | This app loads data directly from the Google Sheet</p>
+            <p class="footer-note"><i class="fas fa-sync-alt"></i> Data updates automatically when the Google Sheet is modified</p>
         </footer>
     </div>
 
