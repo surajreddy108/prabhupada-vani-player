@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Application specific
+uploads/*
+!uploads/.gitkeep
+outputs/*
+!outputs/.gitkeep
+*.mp3
+*.wav
+*.m4a
+*.ogg
+*.flac
+*.txt
+
+# Build files
+build.sh
+runtime.txt
+Procfile
+.python-version
+
+# Documentation
+README.md
