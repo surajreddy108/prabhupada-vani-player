@@ -33,7 +33,8 @@ outputs/*
 *.m4a
 *.ogg
 *.flac
-*.txt
+*_transcription.txt
+transcription.txt
 
 # Build files
 build.sh
