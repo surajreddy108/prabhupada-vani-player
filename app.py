@@ -29,6 +29,11 @@ def index():
     """Render the main page."""
     return render_template('index.html')
 
+@app.route('/health')
+def health():
+    """Health check endpoint for Render."""
+    return jsonify({'status': 'healthy', 'message': 'Server is running'}), 200
+
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
     """Handle audio file upload and transcription."""

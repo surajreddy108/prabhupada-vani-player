@@ -31,4 +31,16 @@ ENV PYTHONUNBUFFERED=1
 
 # Run the application with gunicorn
 # Render automatically sets the PORT environment variable
-CMD gunicorn app:app --bind 0.0.0.0:$PORT --workers 4 --timeout 120
+# Using sync workers with longer timeout for transcription tasks
+# --workers: number of worker processes (2-4 recommended for CPU-bound tasks)
+# --timeout: worker timeout in seconds (300 = 5 minutes for long transcriptions)
+# --keep-alive: keep connections alive for better performance
+# --log-level: set to info for better debugging
+CMD gunicorn app:app \
+    --bind 0.0.0.0:$PORT \
+    --workers 2 \
+    --timeout 300 \
+    --keep-alive 5 \
+    --log-level info \
+    --access-logfile - \
+    --error-logfile -
